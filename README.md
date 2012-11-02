@@ -5,8 +5,7 @@ It provides methods to deal with temporayr files within the Filesystem Component
 
 ## Examples :
 
-CreateTemporaryFiles
-~~~~~~~~~~~~~~~~~
+### CreateTemporaryFiles
 
 CreateTemporaryFiles creates a set of empty files in the temporary folder:
 
@@ -22,10 +21,9 @@ $fs->createTemporaryFiles(20, 'thumb-', '.dcm', 'jpg');
 This method is useful when dealing with libraries which encode images
 depending on the filename extension.
 
-CreateEmptyFile
-~~~~~~~~~~~~~~~
+### CreateEmptyFile
 
-CreateEmptyFile creates an empty file in the specified folder::
+CreateEmptyFile creates an empty file in the specified folder:
 
 ```php
 // return a path to an empty file inside the current working directory
