@@ -14,8 +14,16 @@ namespace Neutron\TemporaryFilesystem;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOException;
 
-class TemporaryFilesystem extends Filesystem
+class TemporaryFilesystem
 {
+    /** @var Filesystem */
+    private $filesystem;
+
+    public function __construct(Filesystem $filesystem)
+    {
+        $this->filesystem = $filesystem;
+    }
+
     /**
      * Get an array of temporary files.
      *
@@ -86,7 +94,7 @@ class TemporaryFilesystem extends Filesystem
                 . ( $extension ? '.' . $extension : '');
 
             if (false === file_exists($file)) {
-                $this->touch($file);
+                $this->filesystem->touch($file);
 
                 return $file;
             }
@@ -95,5 +103,17 @@ class TemporaryFilesystem extends Filesystem
         }
 
         throw new IOException('Unable to generate a temporary filename');
+    }
+
+    /**
+     * Creates a TemporaryFilesystem
+     *
+     * @param Filesystem $filesystem
+     *
+     * @return TemporaryFilesystem
+     */
+    public static function create(Filesystem $filesystem)
+    {
+        return new static($filesystem);
     }
 }

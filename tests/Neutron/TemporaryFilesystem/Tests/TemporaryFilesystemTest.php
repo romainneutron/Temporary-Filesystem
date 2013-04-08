@@ -3,8 +3,7 @@
 namespace Neutron\TemporaryFilesystem\Tests;
 
 use Neutron\TemporaryFilesystem\TemporaryFilesystem;
-
-require_once __DIR__ . '/../../../../src/Neutron/TemporaryFilesystem/TemporaryFilesystem.php';
+use Symfony\Component\Filesystem\Filesystem;
 
 class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +20,7 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
         $this->workspace = sys_get_temp_dir().DIRECTORY_SEPARATOR.time().rand(0, 1000);
         mkdir($this->workspace, 0777, true);
         $this->workspace = realpath($this->workspace);
-        $this->filesystem = new TemporaryFilesystem;
+        $this->filesystem = new TemporaryFilesystem(new Filesystem());
     }
 
     public function tearDown()
