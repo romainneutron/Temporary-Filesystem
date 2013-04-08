@@ -5,6 +5,14 @@ Filesystem Component](https://github.com/symfony/filesystem).
 
 ## Examples :
 
+### CreateTemporaryDirectory
+
+CreateTemporaryDirectory creates a temporary directory with an optional mode :
+
+```php
+$tempDir = $fs->createTemporaryDirectory($mode = 0755);
+```
+
 ### CreateTemporaryFiles
 
 CreateTemporaryFiles creates a set of empty files in the temporary folder:
