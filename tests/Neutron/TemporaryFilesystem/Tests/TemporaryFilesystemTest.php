@@ -20,12 +20,22 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
         $this->workspace = sys_get_temp_dir().DIRECTORY_SEPARATOR.time().rand(0, 1000);
         mkdir($this->workspace, 0777, true);
         $this->workspace = realpath($this->workspace);
-        $this->filesystem = new TemporaryFilesystem(new Filesystem());
+        $this->filesystem = TemporaryFilesystem::create();
     }
 
     public function tearDown()
     {
         $this->clean($this->workspace);
+    }
+
+    public function testCreate()
+    {
+        $this->assertInstanceOf('Neutron\TemporaryFilesystem\TemporaryFilesystem', TemporaryFilesystem::create());
+    }
+
+    public function testConctruct()
+    {
+        $this->assertInstanceOf('Neutron\TemporaryFilesystem\TemporaryFilesystem', new TemporaryFilesystem(new Filesystem()));
     }
 
     /**

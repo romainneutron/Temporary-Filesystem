@@ -138,11 +138,9 @@ class TemporaryFilesystem
     /**
      * Creates a TemporaryFilesystem
      *
-     * @param Filesystem $filesystem
-     *
      * @return TemporaryFilesystem
      */
-    public static function create(Filesystem $filesystem)
+    public static function create()
     {
         return new static($filesystem);
     }
