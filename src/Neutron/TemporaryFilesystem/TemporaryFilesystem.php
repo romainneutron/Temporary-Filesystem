@@ -27,7 +27,6 @@ class TemporaryFilesystem
     /**
      * Creates a temporary directory.
      *
-     * @param string  $name   The directory name
      * @param octal   $mode   The directory mode
      * @param integer $maxTry The maximum number of trials
      *
@@ -35,14 +34,13 @@ class TemporaryFilesystem
      *
      * @throws IOException In case the directory could not be created
      */
-    public function createTemporaryDirectory($name = null, $mode = 0777, $maxTry = 65536)
+    public function createTemporaryDirectory($mode = 0777, $maxTry = 65536)
     {
         $basePath = sys_get_temp_dir();
 
         while ($maxTry > 0) {
             $dir = $basePath . DIRECTORY_SEPARATOR
-                . base_convert(mt_rand(0x19A100, 0x39AA3FF), 10, 36)
-                . ($name ? DIRECTORY_SEPARATOR . $name : '');
+                . base_convert(mt_rand(0x19A100, 0x39AA3FF), 10, 36);
 
             if (false === file_exists($dir)) {
                 $this->filesystem->mkdir($dir, $mode);
