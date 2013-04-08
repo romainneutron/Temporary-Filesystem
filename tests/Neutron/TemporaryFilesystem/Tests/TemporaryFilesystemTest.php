@@ -46,7 +46,7 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getFilesToCreate
+     * @dataProvider provideFilesToCreate
      */
     public function testCreateEmptyFile($prefix, $suffix, $extension, $maxTry, $pattern)
     {
@@ -61,7 +61,21 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
         unlink($file);
     }
 
-    public function getFilesToCreate()
+    /**
+     * @dataProvider provideDirsToCreate
+     */
+    public function testCreateTemporaryDir($name)
+    {
+        $dir = $this->filesystem->createTemporaryDirectory($name);
+        $this->assertTrue(file_exists($dir));
+        $this->assertTrue(is_dir($dir));
+        if (null !== $name) {
+            $this->assertEquals($name, basename($dir));
+        }
+        rmdir($dir);
+    }
+
+    public function provideFilesToCreate()
     {
         return array(
             array(null, null, null, 10, '/\w{5}/'),
@@ -71,6 +85,15 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
             array('romain', null, 'io', 10, '/romain\w{5}\.io/'),
             array(null, 'neutron', 'io', 10, '/\w{5}neutron\.io/'),
             array('romain', 'neutron', 'io', 10, '/romain\w{5}neutron\.io/'),
+        );
+    }
+
+    public function provideDirsToCreate()
+    {
+        return array(
+            array(null),
+            array('neutron'),
+            array('neutron666'),
         );
     }
 
@@ -128,7 +151,7 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getFilesToCreate
+     * @dataProvider provideFilesToCreate
      */
     public function testTemporaryFiles($prefix, $suffix, $extension, $maxTry, $pattern)
     {
