@@ -30,7 +30,7 @@ class TemporaryFilesystem
      * @param octal   $mode   The directory mode
      * @param integer $maxTry The maximum number of trials
      *
-     * @return string         The name of the created directory
+     * @return string The name of the created directory
      *
      * @throws IOException In case the directory could not be created
      */
@@ -94,13 +94,13 @@ class TemporaryFilesystem
      * the given parameters. Please note that the filename contains some
      * random caracters.
      *
-     * @param  string  $basePath  The directory where to create the file
-     * @param  string  $prefix    The prefix of the file
-     * @param  string  $suffix    The suffix of the file
-     * @param  string  $extension The extension of the file
-     * @param  integer $maxTry    The maximum number of trials to create the file
+     * @param string  $basePath  The directory where to create the file
+     * @param string  $prefix    The prefix of the file
+     * @param string  $suffix    The suffix of the file
+     * @param string  $extension The extension of the file
+     * @param integer $maxTry    The maximum number of trials to create the file
      *
-     * @return string  The path of the created file
+     * @return string The path of the created file
      *
      * @throws IOException in case of failure
      */
