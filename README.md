@@ -3,7 +3,15 @@
 TemporaryFilesystem propose an API for temprary filesystem based on [Symfony
 Filesystem Component](https://github.com/symfony/filesystem).
 
-## Examples :
+## Usage
+
+```php
+use Neutron\TemporaryFilesystem\TemporaryFilesystem;
+
+$fs = TemporaryFilesystem::create();
+```
+
+## API Examples :
 
 ### CreateTemporaryDirectory
 
