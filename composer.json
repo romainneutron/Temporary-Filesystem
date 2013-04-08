@@ -2,10 +2,9 @@
     "name": "neutron/temporary-filesystem",
     "description": "Symfony filesystem extension to handle temporary files",
     "require": {
-        "symfony/filesystem": ">=2.0,<=2.2.x-dev"
+        "symfony/filesystem": "~2.0"
     },
     "license": "MIT",
-    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Romain Neutron",
