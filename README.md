@@ -1,7 +1,7 @@
 # TemporaryFilesystem
 
-TemporaryFilesystem is an extension for Symfony Filesystem Component.
-It provides methods to deal with temporayr files within the Filesystem Component.
+TemporaryFilesystem propose an API for temprary filesystem based on [Symfony
+Filesystem Component](https://github.com/symfony/filesystem).
 
 ## Examples :
 
