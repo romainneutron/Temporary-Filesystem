@@ -88,6 +88,29 @@ class TemporaryFilesystem
     }
 
     /**
+     * Creates a temporary file.
+     *
+     * Temporary files are created inside the system temporary folder. You must
+     * removed them manually at the end of use.
+     *
+     * @param string  $prefix    The prefix of the files
+     * @param string  $suffix    The suffix of the files
+     * @param string  $extension The extension of the files
+     * @param integer $maxTry    The maximum number of trials to create one temporary file
+     *
+     * @return array An array of filenames
+     *
+     * @throws \InvalidArgumentException In case you provide a wrong argument
+     * @throws IOException               In case of failure
+     */
+    public function createTemporaryFile($prefix = null, $suffix = null, $extension = null, $maxTry = 65536)
+    {
+        $files = $this->createTemporaryFiles(1, $prefix, $suffix, $extension, $maxTry);
+
+        return array_pop($files);
+    }
+
+    /**
      * Create an empty file in the specified directory.
      *
      * The new file is created in the requested directory and will fit the

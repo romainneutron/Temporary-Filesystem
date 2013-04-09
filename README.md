@@ -23,6 +23,18 @@ CreateTemporaryDirectory creates a temporary directory with an optional mode :
 $tempDir = $fs->createTemporaryDirectory($mode = 0755);
 ```
 
+### CreateTemporaryFile
+
+CreateTemporaryFile creates an empty files in the temporary folder:
+
+```php
+$fs->createTemporaryFile();
+
+// return an empty temporary files with a "thumb-"
+// prefix, '.dcm' as suffix and 'jpg' as extension
+$fs->createTemporaryFile('thumb-', '.dcm', 'jpg');
+```
+
 ### CreateTemporaryFiles
 
 CreateTemporaryFiles creates a set of empty files in the temporary folder:

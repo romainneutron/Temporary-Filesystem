@@ -162,6 +162,20 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider provideFilesToCreate
+     */
+    public function testTemporaryFile($prefix, $suffix, $extension, $maxTry, $pattern)
+    {
+        $file = $this->filesystem->createTemporaryFile($prefix, $suffix, $extension, $maxTry);
+        $this->assertInternalType('string', $file);
+
+        $this->assertTrue(file_exists($file));
+        $this->assertEquals(realpath(sys_get_temp_dir()), realpath(dirname($file)));
+        $this->assertEquals(0, filesize($file));
+        $this->assertRegExp($pattern, basename($file));
+    }
+
+    /**
      * @expectedException Symfony\Component\Filesystem\Exception\IOException
      */
     public function testTemporaryFilesFails()
