@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-* 2.0.1 (2013-04-xx)
+* 2.0.1 (2013-04-09)
 
   * Add TemporaryFilesystem::createTemporaryFile method
 
