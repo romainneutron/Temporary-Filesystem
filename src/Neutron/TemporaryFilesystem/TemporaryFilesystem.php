@@ -142,6 +142,6 @@ class TemporaryFilesystem
      */
     public static function create()
     {
-        return new static($filesystem);
+        return new static(new Filesystem());
     }
 }
