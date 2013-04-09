@@ -3,6 +3,8 @@
 TemporaryFilesystem propose an API for temprary filesystem based on [Symfony
 Filesystem Component](https://github.com/symfony/filesystem).
 
+[![Build Status](https://travis-ci.org/romainneutron/Temporary-Filesystem.png?branch=master)](https://travis-ci.org/romainneutron/Temporary-Filesystem)
+
 ## Usage
 
 ```php
