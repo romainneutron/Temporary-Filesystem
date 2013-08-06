@@ -29,6 +29,8 @@ class Manager implements TemporaryFilesystemInterface
     {
         $this->fs = $fs;
         $this->tmpFs = $tmpFs;
+
+        register_shutdown_function(array($this, 'clean'), null, false);
     }
 
     /**
@@ -110,20 +112,20 @@ class Manager implements TemporaryFilesystemInterface
      *
      * @throws IOException
      */
-    public function clean($scope = null)
+    public function clean($scope = null, $throwException = true)
     {
         if (null !== $scope) {
-            $this->cleanScope($scope);
+            $this->cleanScope($scope, $throwException);
         } else {
             foreach ($this->files as $scope => $files) {
-                $this->cleanScope($scope);
+                $this->cleanScope($scope, $throwException);
             }
         }
 
         return $this;
     }
 
-    private function cleanScope($scope)
+    private function cleanScope($scope, $throwException)
     {
         if (!isset($this->files[$scope])) {
             return;
@@ -134,7 +136,9 @@ class Manager implements TemporaryFilesystemInterface
             unset($this->files[$scope]);
         } catch (SfIOException $e) {
             unset($this->files[$scope]);
-            throw new IOException('Unable to remove all the files', $e->getCode(), $e);
+            if ($throwException) {
+                throw new IOException('Unable to remove all the files', $e->getCode(), $e);
+            }
         }
     }
 }
