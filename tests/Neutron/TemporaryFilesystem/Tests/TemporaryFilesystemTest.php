@@ -93,7 +93,7 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Symfony\Component\Filesystem\Exception\IOException
+     * @expectedException Neutron\TemporaryFilesystem\IOException
      */
     public function testCreateEmptyFileInvalidDir()
     {
@@ -103,7 +103,7 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Symfony\Component\Filesystem\Exception\IOException
+     * @expectedException Neutron\TemporaryFilesystem\IOException
      */
     public function testCreateEmptyFileInvalidDirSecondMethod()
     {
@@ -113,7 +113,7 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Symfony\Component\Filesystem\Exception\IOException
+     * @expectedException Neutron\TemporaryFilesystem\IOException
      */
     public function testCreateEmptyFileFails()
     {
@@ -124,7 +124,7 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Symfony\Component\Filesystem\Exception\IOException
+     * @expectedException Neutron\TemporaryFilesystem\IOException
      */
     public function testCreateEmptyFileOnFile()
     {
@@ -135,7 +135,7 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Symfony\Component\Filesystem\Exception\IOException
+     * @expectedException Neutron\TemporaryFilesystem\IOException
      */
     public function testCreateEmptyFileOnFileSecondMethod()
     {
@@ -176,7 +176,7 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Symfony\Component\Filesystem\Exception\IOException
+     * @expectedException Neutron\TemporaryFilesystem\IOException
      */
     public function testTemporaryFilesFails()
     {

@@ -12,7 +12,7 @@
 namespace Neutron\TemporaryFilesystem;
 
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\Filesystem\Exception\IOException as SfIOException;
 
 class TemporaryFilesystem
 {
@@ -43,7 +43,11 @@ class TemporaryFilesystem
                 . base_convert(mt_rand(0x19A100, 0x39AA3FF), 10, 36);
 
             if (false === file_exists($dir)) {
-                $this->filesystem->mkdir($dir, $mode);
+                try {
+                    $this->filesystem->mkdir($dir, $mode);
+                } catch (SfIOException $e) {
+                    throw new IOException('Unable to make directory', $e->getCode(), $e);
+                }
 
                 return $dir;
             }
@@ -147,7 +151,11 @@ class TemporaryFilesystem
                 . ( $extension ? '.' . $extension : '');
 
             if (false === file_exists($file)) {
-                $this->filesystem->touch($file);
+                try {
+                    $this->filesystem->touch($file);
+                } catch (SfIOException $e) {
+                    throw new IOException('Unable to touch file', $e->getCode(), $e);
+                }
 
                 return $file;
             }
