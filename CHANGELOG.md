@@ -4,6 +4,7 @@ CHANGELOG
 * 2.1.0 (2013-xx-xx)
 
   * Use custom IOException instead of Symfony one.
+  * Add a TemporaryFilesystemInterface.
 
 * 2.0.1 (2013-04-09)
 
