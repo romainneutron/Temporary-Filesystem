@@ -79,6 +79,15 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
         rmdir($dir);
     }
 
+    public function testCreateTemporaryDirWithPrefix()
+    {
+        $dir = $this->filesystem->createTemporaryDirectory(0777, 200, 'neutron');
+        $this->assertTrue(file_exists($dir));
+        $this->assertTrue(is_dir($dir));
+        $this->assertContains('neutron', $dir);
+        rmdir($dir);
+    }
+
     public function provideFilesToCreate()
     {
         return array(

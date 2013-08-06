@@ -20,12 +20,13 @@ interface TemporaryFilesystemInterface
      *
      * @param octal   $mode   The directory mode
      * @param integer $maxTry The maximum number of trials
+     * @param string  $prefix The directory prefix
      *
      * @return string The name of the created directory
      *
      * @throws IOException In case the directory could not be created
      */
-    public function createTemporaryDirectory($mode = 0777, $maxTry = 65536);
+    public function createTemporaryDirectory($mode = 0777, $maxTry = 65536, $prefix = null);
 
     /**
      * Creates an array of temporary files.
