@@ -6,6 +6,7 @@ CHANGELOG
   * Use custom IOException instead of Symfony one.
   * Add a TemporaryFilesystemInterface.
   * Add optional directory prefix to createTemporaryDirectory.
+  * Add temporary files manager.
 
 * 2.0.1 (2013-04-09)
 
