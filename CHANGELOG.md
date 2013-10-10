@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+* 2.0.2 (2013-10-10)
+
+  * Add TemporaryFilesystem::getFilesystem method to expose the underlying object.
+
 * 2.0.1 (2013-04-09)
 
   * Add TemporaryFilesystem::createTemporaryFile method

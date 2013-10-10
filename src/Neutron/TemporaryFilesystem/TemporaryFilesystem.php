@@ -25,6 +25,16 @@ class TemporaryFilesystem
     }
 
     /**
+     * Returns the filesystem.
+     *
+     * @return Filesystem
+     */
+    public function getFilesystem()
+    {
+        return $this->filesystem;
+    }
+
+    /**
      * Creates a temporary directory.
      *
      * @param octal   $mode   The directory mode
