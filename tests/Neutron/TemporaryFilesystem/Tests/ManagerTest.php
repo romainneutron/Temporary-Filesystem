@@ -281,6 +281,11 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $manager->clean();
     }
 
+    public function testCreate()
+    {
+        $this->assertInstanceOf('Neutron\TemporaryFilesystem\Manager', Manager::create());
+    }
+
     private function createTmpFsMock()
     {
         return $this->getMock('Neutron\TemporaryFilesystem\TemporaryFilesystemInterface');

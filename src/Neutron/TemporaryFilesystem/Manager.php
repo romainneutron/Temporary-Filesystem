@@ -125,6 +125,18 @@ class Manager implements TemporaryFilesystemInterface
         return $this;
     }
 
+    /**
+     * Factory for the Manager
+     *
+     * @return Manager
+     */
+    public static function create()
+    {
+        $fs = new Filesystem();
+
+        return new static(new TemporaryFilesystem($fs), $fs);
+    }
+
     private function cleanScope($scope, $throwException)
     {
         if (!isset($this->files[$scope])) {

@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+* 2.1.1 (2013-10-10)
+
+  * Add a factory for the Manager
+
 * 2.1.0 (2013-08-06)
 
   * Use custom IOException instead of Symfony one.
