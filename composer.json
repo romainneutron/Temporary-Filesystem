@@ -9,6 +9,7 @@
         }
     ],
     "require": {
+        "php": "^5.3.9 || ^7.0",
         "symfony/filesystem": "~2.0"
     },
     "require-dev": {
