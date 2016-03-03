@@ -14,9 +14,16 @@ cache:
   directories:
     - $HOME/.composer
 
-before_script:
+matrix:
+  include:
+    - php: 5.3
+      env: COMPOSER_FLAGS="--prefer-lowest"
+
+before_install:
   - composer self-update
-  - composer update --prefer-source
+  - if [ "COMPOSER_FLAGS" == "--prefer-lowest" ]; then composer require "roave/security-advisories" dev-master --no-update; fi;
+
+install: composer update --prefer-source $COMPOSER_FLAGS
 
 script:
   - phpunit
