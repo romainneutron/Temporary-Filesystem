@@ -19,6 +19,11 @@
     <php>
       <ini name="display_errors" value="on"/>
     </php>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src/</directory>
+        </whitelist>
+    </filter>
 
     <testsuites>
         <testsuite name="TemporaryFilesystem tests Suite">

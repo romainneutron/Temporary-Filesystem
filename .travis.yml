@@ -26,4 +26,4 @@ before_install:
 install: composer update --prefer-source $COMPOSER_FLAGS
 
 script:
-  - phpunit
+  - vendor/bin/phpunit
