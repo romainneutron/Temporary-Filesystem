@@ -11,6 +11,10 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
      * @var string $workspace
      */
     private $workspace = null;
+
+    /**
+     * @var TemporaryFilesystem
+     */
     private $filesystem;
 
     public function setUp()
