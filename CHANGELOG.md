@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+* 2.2.0 (2016-03-05)
+  * Support Symfony with all 2.x LTS versions and 3.0, add big travis matrix (@patkar)
+  * Update php unit to old stable (@patkar)
+  * Test with lowest (security release) version and php 5.3 (@patkar)
+  * Support PHP 5.6, 7.0, and HHVM and use docker with cache on travis (@patkar)
+  * Composer cleanup, ignore lock file (@patkar)
+
 * 2.1.1 (2013-10-10)
 
   * Add a factory for the Manager
