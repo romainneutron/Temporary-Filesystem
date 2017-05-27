@@ -5,18 +5,8 @@ namespace Neutron\TemporaryFilesystem\Tests;
 use Neutron\TemporaryFilesystem\TemporaryFilesystem;
 use Symfony\Component\Filesystem\Filesystem;
 
-class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
+class TemporaryFilesystemTest extends TestCase
 {
-    /**
-     * @var string $workspace
-     */
-    private $workspace = null;
-
-    /**
-     * @var TemporaryFilesystem
-     */
-    private $filesystem;
-
     public function setUp()
     {
         parent::setUp();
@@ -27,11 +17,6 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
         $this->filesystem = TemporaryFilesystem::create();
     }
 
-    public function tearDown()
-    {
-        $this->clean($this->workspace);
-    }
-
     public function testCreate()
     {
         $this->assertInstanceOf('Neutron\TemporaryFilesystem\TemporaryFilesystem', TemporaryFilesystem::create());
@@ -40,23 +25,6 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
     public function testConctruct()
     {
         $this->assertInstanceOf('Neutron\TemporaryFilesystem\TemporaryFilesystem', new TemporaryFilesystem(new Filesystem()));
-    }
-
-    /**
-     * @param string $file
-     */
-    private function clean($file)
-    {
-        if (is_dir($file) && !is_link($file)) {
-            $dir = new \FilesystemIterator($file);
-            foreach ($dir as $childFile) {
-                $this->clean($childFile);
-            }
-
-            rmdir($file);
-        } else {
-            unlink($file);
-        }
     }
 
     /**
