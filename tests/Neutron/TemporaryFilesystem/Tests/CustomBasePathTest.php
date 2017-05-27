@@ -21,4 +21,10 @@ class CustomBasePathTest extends TestCase
         $dir = $this->filesystem->createTemporaryDirectory();
         $this->assertStringStartsWith(DEV_VAR_DIR, $dir);
     }
+
+    public function testTemporaryFile()
+    {
+        $file = $this->filesystem->createTemporaryFile();
+        $this->assertStringStartsWith(DEV_VAR_DIR, $file);
+    }
 }

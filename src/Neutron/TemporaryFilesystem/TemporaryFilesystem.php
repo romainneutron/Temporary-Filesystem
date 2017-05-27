@@ -71,7 +71,7 @@ class TemporaryFilesystem implements TemporaryFilesystemInterface
         $files = array();
 
         while ($quantity > 0) {
-            $files[] = $this->createEmptyFile(sys_get_temp_dir(), $prefix, $suffix, $extension, $maxTry);
+            $files[] = $this->createEmptyFile($this->basePath, $prefix, $suffix, $extension, $maxTry);
             $quantity --;
         }
 
