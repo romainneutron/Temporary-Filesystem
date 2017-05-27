@@ -19,9 +19,17 @@ class TemporaryFilesystem implements TemporaryFilesystemInterface
     /** @var Filesystem */
     private $filesystem;
 
-    public function __construct(Filesystem $filesystem)
+    /** @var string */
+    private $basePath;
+
+    public function __construct(Filesystem $filesystem, $basePath = null)
     {
         $this->filesystem = $filesystem;
+
+        if (null === $basePath) {
+            $basePath = sys_get_temp_dir();
+        }
+        $this->basePath = $basePath;
     }
 
     /**
@@ -29,7 +37,7 @@ class TemporaryFilesystem implements TemporaryFilesystemInterface
      */
     public function createTemporaryDirectory($mode = 0777, $maxTry = 65536, $prefix = null)
     {
-        $basePath = sys_get_temp_dir();
+        $basePath = $this->basePath;
 
         while ($maxTry > 0) {
             $dir = $basePath . DIRECTORY_SEPARATOR
@@ -63,7 +71,7 @@ class TemporaryFilesystem implements TemporaryFilesystemInterface
         $files = array();
 
         while ($quantity > 0) {
-            $files[] = $this->createEmptyFile(sys_get_temp_dir(), $prefix, $suffix, $extension, $maxTry);
+            $files[] = $this->createEmptyFile($this->basePath, $prefix, $suffix, $extension, $maxTry);
             $quantity --;
         }
 
@@ -123,8 +131,8 @@ class TemporaryFilesystem implements TemporaryFilesystemInterface
      *
      * @return TemporaryFilesystem
      */
-    public static function create()
+    public static function create($basePath = null)
     {
-        return new static(new Filesystem());
+        return new static(new Filesystem(), $basePath);
     }
 }
