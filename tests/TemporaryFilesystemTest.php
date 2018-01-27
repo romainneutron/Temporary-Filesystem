@@ -5,7 +5,7 @@ namespace Neutron\TemporaryFilesystem\Tests;
 use Neutron\TemporaryFilesystem\TemporaryFilesystem;
 use Symfony\Component\Filesystem\Filesystem;
 
-class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
+class TemporaryFilesystemTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var string $workspace

@@ -4,7 +4,7 @@ namespace Neutron\TemporaryFilesystem\Tests;
 
 use Neutron\TemporaryFilesystem\Manager;
 
-class ManagerTest extends \PHPUnit_Framework_TestCase
+class ManagerTest extends \PHPUnit\Framework\TestCase
 {
     public function testCreateEmptyFileAndCleanScope()
     {
@@ -17,7 +17,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $fs = $this->createFsMock();
         $fs->expects($this->once())
             ->method('remove')
-            ->with(array('/path/to/empty/file'));
+            ->with(['/path/to/empty/file']);
 
         $tmpFs = $this->createTmpFsMock();
         $tmpFs->expects($this->once())
@@ -64,7 +64,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $fs = $this->createFsMock();
         $fs->expects($this->once())
             ->method('remove')
-            ->with(array('/path/to/empty/file'));
+            ->with(['/path/to/empty/file']);
 
         $tmpFs = $this->createTmpFsMock();
         $tmpFs->expects($this->once())
@@ -152,7 +152,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $fs = $this->createFsMock();
         $fs->expects($this->once())
             ->method('remove')
-            ->with(array('/path/to/file'));
+            ->with(['/path/to/file']);
 
         $tmpFs = $this->createTmpFsMock();
         $tmpFs->expects($this->once())
@@ -197,7 +197,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $fs = $this->createFsMock();
         $fs->expects($this->once())
             ->method('remove')
-            ->with(array('/path/to/file'));
+            ->with(['/path/to/file']);
 
         $tmpFs = $this->createTmpFsMock();
         $tmpFs->expects($this->once())
@@ -221,16 +221,16 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $fs = $this->createFsMock();
         $fs->expects($this->once())
             ->method('remove')
-            ->with(array('/path/to/file'));
+            ->with(['/path/to/file']);
 
         $tmpFs = $this->createTmpFsMock();
         $tmpFs->expects($this->once())
             ->method('createTemporaryFiles')
             ->with($quantity, $prefix, $suffix, $extension, $maxTry)
-            ->will($this->returnValue(array('/path/to/file')));
+            ->will($this->returnValue(['/path/to/file']));
 
         $manager = new Manager($tmpFs, $fs);
-        $this->assertEquals(array('/path/to/file'), $manager->createTemporaryFiles($quantity, $prefix, $suffix, $extension, $maxTry));
+        $this->assertEquals(['/path/to/file'], $manager->createTemporaryFiles($quantity, $prefix, $suffix, $extension, $maxTry));
         $manager->clean($prefix);
     }
 
@@ -250,10 +250,10 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $tmpFs->expects($this->once())
             ->method('createTemporaryFiles')
             ->with($quantity, $prefix, $suffix, $extension, $maxTry)
-            ->will($this->returnValue(array('/path/to/file')));
+            ->will($this->returnValue(['/path/to/file']));
 
         $manager = new Manager($tmpFs, $fs);
-        $this->assertEquals(array('/path/to/file'), $manager->createTemporaryFiles($quantity, $prefix, $suffix, $extension, $maxTry));
+        $this->assertEquals(['/path/to/file'], $manager->createTemporaryFiles($quantity, $prefix, $suffix, $extension, $maxTry));
         $manager->clean('other prefix');
     }
 
@@ -268,33 +268,33 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $fs = $this->createFsMock();
         $fs->expects($this->once())
             ->method('remove')
-            ->with(array('/path/to/file'));
+            ->with(['/path/to/file']);
 
         $tmpFs = $this->createTmpFsMock();
         $tmpFs->expects($this->once())
             ->method('createTemporaryFiles')
             ->with($quantity, $prefix, $suffix, $extension, $maxTry)
-            ->will($this->returnValue(array('/path/to/file')));
+            ->will($this->returnValue(['/path/to/file']));
 
         $manager = new Manager($tmpFs, $fs);
-        $this->assertEquals(array('/path/to/file'), $manager->createTemporaryFiles($quantity, $prefix, $suffix, $extension, $maxTry));
+        $this->assertEquals(['/path/to/file'], $manager->createTemporaryFiles($quantity, $prefix, $suffix, $extension, $maxTry));
         $manager->clean();
     }
 
     public function testCreate()
     {
-        $this->assertInstanceOf('Neutron\TemporaryFilesystem\Manager', Manager::create());
+        $this->assertInstanceOf(\Neutron\TemporaryFilesystem\Manager::class, Manager::create());
     }
 
     private function createTmpFsMock()
     {
-        return $this->getMock('Neutron\TemporaryFilesystem\TemporaryFilesystemInterface');
+        return $this->getMockBuilder(\Neutron\TemporaryFilesystem\TemporaryFilesystemInterface::class)->getMock();
     }
 
     private function createFsMock()
     {
         return $this
-            ->getMockBuilder('Symfony\Component\Filesystem\Filesystem')
+            ->getMockBuilder(\Symfony\Component\Filesystem\Filesystem::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
