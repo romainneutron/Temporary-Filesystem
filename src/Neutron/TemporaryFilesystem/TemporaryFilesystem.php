@@ -30,6 +30,8 @@ class TemporaryFilesystem implements TemporaryFilesystemInterface
     public function createTemporaryDirectory($mode = 0777, $maxTry = 65536, $prefix = null)
     {
         $basePath = sys_get_temp_dir();
+        // Remove trailing slashes if present
+        $basePath = rtrim($basePath, DIRECTORY_SEPARATOR);
 
         while ($maxTry > 0) {
             $dir = $basePath . DIRECTORY_SEPARATOR
