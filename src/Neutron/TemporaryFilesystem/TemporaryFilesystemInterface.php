@@ -11,8 +11,6 @@
 
 namespace Neutron\TemporaryFilesystem;
 
-use Symfony\Component\Filesystem\Exception\IOException;
-
 interface TemporaryFilesystemInterface
 {
     /**
