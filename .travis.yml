@@ -4,7 +4,9 @@ php:
   - 5.6
   - 7.0
   - 7.1
-  - hhvm
+  - 7.2
+  - 7.3
+  - 7.4
 
 sudo: false
 
@@ -32,6 +34,12 @@ matrix:
       env: SYMFONY_VERSION=3.0.*@dev
     - php: 7.1
       env: SYMFONY_VERSION=4.*
+    - php: 7.2
+      env: SYMFONY_VERSION=5.*
+    - php: 7.3
+      env: SYMFONY_VERSION=5.*
+    - php: 7.4
+      env: SYMFONY_VERSION=5.*
 
 before_install:
   - composer self-update
