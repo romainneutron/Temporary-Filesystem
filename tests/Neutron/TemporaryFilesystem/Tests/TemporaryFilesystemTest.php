@@ -2,10 +2,12 @@
 
 namespace Neutron\TemporaryFilesystem\Tests;
 
+use Neutron\TemporaryFilesystem\IOException;
 use Neutron\TemporaryFilesystem\TemporaryFilesystem;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
-class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
+class TemporaryFilesystemTest extends TestCase
 {
     /**
      * @var string $workspace
@@ -88,7 +90,7 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
         $dir = $this->filesystem->createTemporaryDirectory(0777, 200, 'neutron');
         $this->assertTrue(file_exists($dir));
         $this->assertTrue(is_dir($dir));
-        $this->assertContains('neutron', $dir);
+        $this->assertStringContainsString('neutron', $dir);
         rmdir($dir);
     }
 
@@ -105,53 +107,48 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @expectedException Neutron\TemporaryFilesystem\IOException
-     */
     public function testCreateEmptyFileInvalidDir()
     {
+        $this->expectException(IOException::class);
+
         $createDir = $this->workspace . DIRECTORY_SEPARATOR . 'invalid-book-dir';
 
         $this->filesystem->createEmptyFile($createDir);
     }
 
-    /**
-     * @expectedException Neutron\TemporaryFilesystem\IOException
-     */
     public function testCreateEmptyFileInvalidDirSecondMethod()
     {
+        $this->expectException(IOException::class);
+
         $createDir = $this->workspace . DIRECTORY_SEPARATOR . 'invalid-book-dir';
 
         $this->filesystem->createEmptyFile($createDir, 'romain', 'neutron');
     }
 
-    /**
-     * @expectedException Neutron\TemporaryFilesystem\IOException
-     */
     public function testCreateEmptyFileFails()
     {
+        $this->expectException(IOException::class);
+
         $createDir = $this->workspace . DIRECTORY_SEPARATOR . 'book-dir';
         mkdir($createDir);
 
         $this->filesystem->createEmptyFile($createDir, 'romain', 'neutron', null, 0);
     }
 
-    /**
-     * @expectedException Neutron\TemporaryFilesystem\IOException
-     */
     public function testCreateEmptyFileOnFile()
     {
+        $this->expectException(IOException::class);
+
         $createDir = $this->workspace . DIRECTORY_SEPARATOR . 'book-dir';
         touch($createDir);
 
         $this->filesystem->createEmptyFile($createDir, null, null, null);
     }
 
-    /**
-     * @expectedException Neutron\TemporaryFilesystem\IOException
-     */
     public function testCreateEmptyFileOnFileSecondMethod()
     {
+        $this->expectException(IOException::class);
+
         $createDir = $this->workspace . DIRECTORY_SEPARATOR . 'book-dir';
         touch($createDir);
 
@@ -180,7 +177,7 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
     public function testTemporaryFile($prefix, $suffix, $extension, $maxTry, $pattern)
     {
         $file = $this->filesystem->createTemporaryFile($prefix, $suffix, $extension, $maxTry);
-        $this->assertInternalType('string', $file);
+        $this->assertIsString($file);
 
         $this->assertTrue(file_exists($file));
         $this->assertEquals(realpath(sys_get_temp_dir()), realpath(dirname($file)));
@@ -188,19 +185,17 @@ class TemporaryFilesystemTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp($pattern, basename($file));
     }
 
-    /**
-     * @expectedException Neutron\TemporaryFilesystem\IOException
-     */
     public function testTemporaryFilesFails()
     {
+        $this->expectException(IOException::class);
+
         $this->filesystem->createTemporaryFiles(3, 'prefix', 'suffix', null, 0);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testTemporaryFilesInvalidQuantity()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->filesystem->createTemporaryFiles(0);
     }
 }
