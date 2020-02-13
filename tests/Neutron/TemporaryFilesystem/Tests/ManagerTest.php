@@ -288,14 +288,25 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
 
     private function createTmpFsMock()
     {
-        return $this->getMockBuilder('Neutron\TemporaryFilesystem\TemporaryFilesystemInterface')->getMock();
+        try {
+            return $this->getMockBuilder('Neutron\TemporaryFilesystem\TemporaryFilesystemInterface')->getMock();
+        } catch (\Throwable $t) {
+            return @$this->getMockBuilder('Neutron\TemporaryFilesystem\TemporaryFilesystemInterface')->getMock();
+        }
     }
 
     private function createFsMock()
     {
-        return $this
-            ->getMockBuilder('Symfony\Component\Filesystem\Filesystem')
-            ->disableOriginalConstructor()
-            ->getMock();
+        try {
+            return $this
+                ->getMockBuilder('Symfony\Component\Filesystem\Filesystem')
+                ->disableOriginalConstructor()
+                ->getMock();
+        } catch (\Throwable $t) {
+            return @$this
+                ->getMockBuilder('Symfony\Component\Filesystem\Filesystem')
+                ->disableOriginalConstructor()
+                ->getMock();
+        }
     }
 }
