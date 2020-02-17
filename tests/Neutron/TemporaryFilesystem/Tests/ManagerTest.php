@@ -3,8 +3,9 @@
 namespace Neutron\TemporaryFilesystem\Tests;
 
 use Neutron\TemporaryFilesystem\Manager;
+use PHPUnit\Framework\TestCase;
 
-class ManagerTest extends \PHPUnit_Framework_TestCase
+class ManagerTest extends TestCase
 {
     public function testCreateEmptyFileAndCleanScope()
     {
@@ -288,7 +289,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
 
     private function createTmpFsMock()
     {
-        return $this->getMock('Neutron\TemporaryFilesystem\TemporaryFilesystemInterface');
+        return $this->getMockBuilder('Neutron\TemporaryFilesystem\TemporaryFilesystemInterface')->getMock();
     }
 
     private function createFsMock()
